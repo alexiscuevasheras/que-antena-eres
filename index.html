@@ -56,13 +56,17 @@
   .sci { font-style: italic; color: var(--muted); margin-top: -6px; }
   .fact { background: var(--soft); border-radius: 14px; padding: 14px 16px; margin: 16px 0; }
   .fact p { margin: 4px 0 0; }
+  .prize { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; object-position: center 55%; border-radius: 16px; margin-bottom: 8px; }
+  .prize-caption { font-size: .85rem; color: var(--muted); margin-bottom: 20px; }
+  .prize-small { display: block; width: 100%; max-width: 260px; aspect-ratio: 1; object-fit: cover; object-position: center 55%; border-radius: 12px; margin: 0 auto 12px; }
   [hidden] { display: none !important; }
 </style>
 </head>
 <body>
 <main>
   <section id="intro" class="card">
-    <div class="hero-ant">🐜</div>
+    <img class="prize" src="hormiga-frente.jpg" alt="Hormiga de crochet con antenas de resistencias" width="675" height="900">
+    <p class="prize-caption">🎁 El premio: hormiga de crochet hecha a mano (sí, sus antenas son resistencias)</p>
     <h1>¿Qué antena eres?</h1>
     <p>20 preguntas, unos 3 minutos. Descubre qué hormiga eres (con datos reales) y entra a la tómbola para ganar una <strong>hormiga de crochet</strong> hecha a mano.</p>
     <button class="btn" id="start">Empezar</button>
@@ -97,8 +101,9 @@
     <div class="fact"><strong>🔬 Dato real</strong><p id="r-fact"></p></div>
     <p class="muted" id="r-second"></p>
     <div class="ticket">
+      <img class="prize-small" src="hormiga-lado.jpg" alt="La hormiga de crochet del premio" width="675" height="900" loading="lazy">
       <strong>🎟️ Ya estás en la tómbola</strong><br>
-      <span class="muted">Si ganas la hormiga de crochet te buscamos al final.</span>
+      <span class="muted">Si ganas esta hormiga de crochet te buscamos al final.</span>
     </div>
   </section>
 </main>
