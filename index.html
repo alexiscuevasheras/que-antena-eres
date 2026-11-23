@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>¿Qué antena eres?</title>
-<meta name="description" content="20 preguntas para saber qué hormiga eres. Al final entras a la tómbola por una hormiga de crochet.">
+<meta name="description" content="12 preguntas para saber qué hormiga eres. Al final entras a la tómbola por una hormiga de crochet.">
 <link rel="icon" href="hormiga-frente.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&family=Caveat:wght@600&display=swap" rel="stylesheet">
@@ -80,7 +80,7 @@
       <span class="hand">el premio. sí, sus antenas son resistencias</span>
     </div>
     <h1>¿Qué antena eres?</h1>
-    <p>Son 20 preguntas, como 3 minutos. Te decimos qué hormiga eres y te contamos algo de ella que seguro no sabías.</p>
+    <p>Son 12 preguntas, como 2 minutos. Te decimos qué hormiga eres y te contamos algo de ella que seguro no sabías.</p>
     <p class="muted">Al final entras a la tómbola por la hormiga de crochet de la foto.</p>
     <button class="btn" id="start">Empezar</button>
   </section>
@@ -182,103 +182,60 @@ const QUESTIONS = [
     ["Volteo a ver a mis amigos y entre todos le decimos algo", { fuego: 2 }],
     ["Me aguanto, tengo prisa", { cortadora: 2 }],
     ["Ni lo vio venir, ya le gané el lugar", { trampa: 2 }] ] },
-  { q: "Es viernes y no hay plan.", options: [
-    ["Me lanzo a donde sea, ya veremos", { legionaria: 2 }],
-    ["Me quedo en casa haciendo algo con las manos", { tejedora: 2 }],
-    ["Invito a todos a cenar a mi casa", { mielera: 2 }],
-    ["Mando mensaje a cinco grupos distintos", { argentina: 2 }],
-    ["Perfecto, así adelanto tarea", { cortadora: 1, carpintera: 1 }] ] },
-  { q: "En los trabajos en equipo eres quien…", options: [
-    ["Arma el Drive con carpetas y fechas", { cortadora: 2 }],
-    ["Hace que las diapositivas se vean bien", { tejedora: 2 }],
-    ["Lleva algo de comer a la junta", { mielera: 2 }],
-    ["Propone irse a trabajar a otro lado porque ya se aburrió", { legionaria: 2 }] ] },
-  { q: "Se va la luz en pleno examen en línea.", options: [
-    ["Le marco a todo el grupo para ver cómo le hacemos", { fuego: 2 }],
-    ["En dos minutos ya me conecté desde el celular", { trampa: 2 }],
-    ["Me pongo de malas y que nadie me hable", { bala: 2 }],
-    ["Tengo power bank, datos y velas, obvio", { mielera: 2 }] ] },
-  { q: "Tu lista de contactos:", options: [
-    ["Más de mil y sí sé quién es cada quien", { argentina: 2 }],
-    ["Poquitos pero de verdad", { bala: 1, fuego: 1 }],
-    ["Gente que conocí de viaje y ya no sé dónde anda", { legionaria: 2 }],
-    ["Puros del equipo, el club o el taller", { tejedora: 1, cortadora: 1 }] ] },
-  { q: "Escoge un superpoder.", options: [
-    ["Ser la persona más rápida del mundo", { trampa: 2 }],
-    ["Cargar todo el súper en un solo viaje", { cortadora: 2 }],
-    ["Que nadie se atreva a hacerme enojar", { bala: 2 }],
-    ["Hacer lo que sea con lo que encuentre", { tejedora: 2 }] ] },
-  { q: "Tu relación con la comida:", options: [
-    ["Siempre traigo algo para compartir", { mielera: 2 }],
-    ["Hago meal prep los domingos", { cortadora: 2 }],
-    ["Como donde me agarre el hambre", { legionaria: 2 }],
-    ["Le pongo salsa a todo", { fuego: 2 }] ] },
-  { q: "¿Dónde vivirías?", options: [
-    ["En una van, cambiando de lugar", { legionaria: 2 }],
-    ["En un depa decorado todo por mí", { tejedora: 2 }],
-    ["En un edificio donde vivan todos mis amigos", { argentina: 2 }],
-    ["Lejos, donde nadie me moleste", { bala: 2 }] ] },
-  { q: "Alguien te pide un favor.", options: [
-    ["Le doy hasta lo que no tengo", { mielera: 2 }],
-    ["Va, pero rápido", { trampa: 2 }],
-    ["Meto a todo el grupo a ayudar", { fuego: 1, argentina: 1 }],
-    ["Le paso los pasos en una lista", { cortadora: 2 }] ] },
-  { q: "¿Qué dices más seguido?", options: [
-    ["Ya lo hice, luego vemos si estaba bien", { trampa: 2 }],
-    ["Déjame, yo lo hago", { tejedora: 2 }],
-    ["Ah, ¿lo conoces? Es mi amigo", { argentina: 2 }],
-    ["No me busques", { bala: 2 }] ] },
-  { q: "En el celular de tus amigos estás guardado como…", options: [
-    ["Mamá o papá del grupo", { mielera: 2 }],
-    ["\"¿Dónde andas?\"", { legionaria: 2 }],
-    ["Guardaespaldas", { fuego: 2 }],
-    ["\"Quien sí sabe cuándo se entrega\"", { cortadora: 2 }] ] },
-  { q: "¿Qué te dicen más?", options: [
-    ["Ya bájale", { fuego: 2 }],
-    ["¿Cómo que ya acabaste?", { trampa: 2 }],
-    ["¿Tú lo hiciste? Está bien bonito", { tejedora: 2 }],
-    ["¿Y tú de dónde conoces a todos?", { argentina: 1, legionaria: 1 }] ] },
   { q: "¿A qué hora rindes más?", options: [
     ["Después de la 1 a.m.", { carpintera: 2 }],
     ["En la mañana, con café y mi rutina", { cortadora: 2 }],
     ["Cuando me llega la idea, a la hora que sea", { tejedora: 2 }],
     ["Después de comer bien", { escamolera: 1, mielera: 1 }],
     ["Todo el día, no me paro", { legionaria: 2 }] ] },
+  { q: "En los trabajos en equipo eres quien…", options: [
+    ["Arma el Drive con carpetas y fechas", { cortadora: 2 }],
+    ["Hace que las diapositivas se vean bien", { tejedora: 2 }],
+    ["Lleva algo de comer a la junta", { mielera: 2 }],
+    ["Propone irse a trabajar a otro lado porque ya se aburrió", { legionaria: 2 }] ] },
   { q: "¿Qué platillo eres?", options: [
     ["Escamoles con mantequilla", { escamolera: 2 }],
     ["Chiles en nogada, mucho trabajo pero vale la pena", { tejedora: 2 }],
     ["Salsa macha, pica y no avisa", { bala: 1, fuego: 1 }],
     ["Tamales para todos", { mielera: 2 }],
     ["Tacos de la calle a las 2 am", { carpintera: 1, legionaria: 1 }] ] },
-  { q: "Te regalan algo que no te gustó.", options: [
-    ["Se me nota en la cara", { bala: 2 }],
-    ["Lo convierto en otra cosa", { tejedora: 2 }],
-    ["Lo guardo por si alguien lo necesita", { mielera: 2 }],
-    ["Le encuentro algo que sí me guste", { escamolera: 2 }],
-    ["Gracias, y al rato ya se me olvidó", { trampa: 2 }] ] },
+  { q: "Se va la luz en pleno examen en línea.", options: [
+    ["Le marco a todo el grupo para ver cómo le hacemos", { fuego: 2 }],
+    ["En dos minutos ya me conecté desde el celular", { trampa: 2 }],
+    ["Me pongo de malas y que nadie me hable", { bala: 2 }],
+    ["Tengo power bank, datos y velas, obvio", { mielera: 2 }] ] },
   { q: "¿Cómo estudias para un parcial?", options: [
     ["Me clavo hasta entender todo a fondo", { carpintera: 2 }],
     ["Apuntes de colores y calendario", { cortadora: 2 }],
     ["En un grupo de estudio de quince personas", { argentina: 2 }],
     ["Un día antes, a toda velocidad", { trampa: 2 }],
     ["Con un libro que nadie más usa", { escamolera: 2 }] ] },
-  { q: "¿Qué te choca más?", options: [
-    ["Que me cambien el plan", { cortadora: 2 }],
-    ["Que no me tomen en cuenta", { escamolera: 2 }],
-    ["Estar todo el día en el mismo lugar", { legionaria: 2 }],
-    ["Que hagan ruido cuando me estoy concentrando", { carpintera: 2 }] ] },
-  { q: "¿A dónde te escaparías?", options: [
-    ["A una cabaña en el bosque", { carpintera: 2 }],
-    ["A la selva, sin señal", { bala: 1, legionaria: 1 }],
-    ["A un mercado a probar de todo", { escamolera: 1, mielera: 1 }],
-    ["A Xochimilco con todos mis amigos", { fuego: 2 }],
-    ["A cualquier ciudad donde tenga conocidos", { argentina: 2 }] ] },
+  { q: "Tu lista de contactos:", options: [
+    ["Más de mil y sí sé quién es cada quien", { argentina: 2 }],
+    ["Poquitos pero de verdad", { bala: 1, fuego: 1 }],
+    ["Gente que conocí de viaje y ya no sé dónde anda", { legionaria: 2 }],
+    ["Puros del equipo, el club o el taller", { tejedora: 1, cortadora: 1 }] ] },
   { q: "En una fiesta…", options: [
     ["Me voy hasta que cierran", { carpintera: 2 }],
     ["Llevo la comida", { mielera: 2 }],
     ["Pongo la música y hago que todos bailen", { argentina: 1, fuego: 1 }],
     ["Llego con un outfit que nadie más se atrevería a usar", { escamolera: 1, tejedora: 1 }],
     ["Armo el after en otro lado", { legionaria: 2 }] ] },
+  { q: "Escoge un superpoder.", options: [
+    ["Ser la persona más rápida del mundo", { trampa: 2 }],
+    ["Cargar todo el súper en un solo viaje", { cortadora: 2 }],
+    ["Que nadie se atreva a hacerme enojar", { bala: 2 }],
+    ["Hacer lo que sea con lo que encuentre", { tejedora: 2 }] ] },
+  { q: "En el celular de tus amigos estás guardado como…", options: [
+    ["Mamá o papá del grupo", { mielera: 2 }],
+    ["\"¿Dónde andas?\"", { legionaria: 2 }],
+    ["Guardaespaldas", { fuego: 2 }],
+    ["\"Quien sí sabe cuándo se entrega\"", { cortadora: 2 }] ] },
+  { q: "¿Qué dices más seguido?", options: [
+    ["Ya lo hice, luego vemos si estaba bien", { trampa: 2 }],
+    ["Déjame, yo lo hago", { tejedora: 2 }],
+    ["Ah, ¿lo conoces? Es mi amigo", { argentina: 2 }],
+    ["No me busques", { bala: 2 }] ] },
   { q: "¿Cómo te describirían tus amigos?", options: [
     ["Poca gente me conoce, pero quien me conoce me quiere", { escamolera: 2 }],
     ["No hago ruido, pero siempre cumplo", { carpintera: 2 }],
