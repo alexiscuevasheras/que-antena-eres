@@ -50,7 +50,6 @@
   .check { display: flex; gap: 10px; align-items: flex-start; font-weight: 400; font-size: .85rem; color: var(--muted); }
   .check input { width: auto; margin: 3px 0 0; }
   .error { color: var(--accent); font-size: .9rem; min-height: 1.4em; }
-  .result-emoji { font-size: 4.5rem; line-height: 1; margin-bottom: 8px; }
   .tag { display: inline-block; background: var(--soft); border-radius: 99px; padding: 4px 12px; font-size: .85rem; margin: 0 6px 6px 0; }
   .ticket { margin-top: 20px; padding: 16px; border: 2px dashed var(--accent); border-radius: 14px; text-align: center; }
   .sci { font-style: italic; color: var(--muted); margin-top: -6px; }
@@ -66,7 +65,7 @@
 <main>
   <section id="intro" class="card">
     <img class="prize" src="hormiga-frente.jpg" alt="Hormiga de crochet con antenas de resistencias" width="675" height="900">
-    <p class="prize-caption">🎁 El premio: hormiga de crochet hecha a mano (sí, sus antenas son resistencias)</p>
+    <p class="prize-caption">El premio: hormiga de crochet hecha a mano (sí, sus antenas son resistencias)</p>
     <h1>¿Qué antena eres?</h1>
     <p>20 preguntas, unos 3 minutos. Descubre qué hormiga eres (con datos reales) y entra a la tómbola para ganar una <strong>hormiga de crochet</strong> hecha a mano.</p>
     <button class="btn" id="start">Empezar</button>
@@ -80,7 +79,7 @@
   </section>
 
   <form id="signup" class="card" hidden novalidate>
-    <h2>¡Ya casi! 🐜</h2>
+    <h2>¡Ya casi!</h2>
     <p class="muted">Déjanos tu nombre y correo para ver tu resultado y entrar a la tómbola.</p>
     <label for="name">Nombre</label>
     <input id="name" autocomplete="name" required maxlength="100">
@@ -92,17 +91,16 @@
   </form>
 
   <section id="result" class="card" hidden>
-    <div class="result-emoji" id="r-emoji"></div>
     <p class="muted" style="margin:0">Eres…</p>
     <h1 id="r-name"></h1>
     <p class="sci" id="r-sci"></p>
     <p id="r-desc"></p>
     <div id="r-tags"></div>
-    <div class="fact"><strong>🔬 Dato real</strong><p id="r-fact"></p></div>
+    <div class="fact"><strong>Dato real</strong><p id="r-fact"></p></div>
     <p class="muted" id="r-second"></p>
     <div class="ticket">
       <img class="prize-small" src="hormiga-lado.jpg" alt="La hormiga de crochet del premio" width="675" height="900" loading="lazy">
-      <strong>🎟️ Ya estás en la tómbola</strong><br>
+      <strong>Ya estás en la tómbola</strong><br>
       <span class="muted">Si ganas esta hormiga de crochet te buscamos al final.</span>
     </div>
   </section>
@@ -112,61 +110,61 @@
 <script>
 const ANTS = {
   bala: {
-    name: "Hormiga bala", sci: "Paraponera clavata", emoji: "💥",
+    name: "Hormiga bala", sci: "Paraponera clavata",
     desc: "Intensa, leal y con mecha corta: te enojas fácil y cuando te provocan, se nota. Pero tu gente sabe que contigo nadie se mete.",
     fact: "Tiene la picadura más dolorosa de cualquier insecto (nivel 4+ en el índice Schmidt) y el dolor puede durar 24 horas. Se llama \"bala\" porque dicen que se siente como un balazo.",
     tags: ["Intensa", "Leal", "No me provoques"]
   },
   cortadora: {
-    name: "Hormiga cortadora de hojas", sci: "Atta", emoji: "🍃",
+    name: "Hormiga cortadora de hojas", sci: "Atta",
     desc: "Organizada, trabajadora y con un plan para todo. Tienes un sistema y lo cumples, aunque cargues con más de lo que te toca.",
     fact: "No se comen las hojas: las usan para cultivar un hongo del que se alimentan. Fueron agricultoras millones de años antes que los humanos, y pueden cargar varias veces su propio peso.",
     tags: ["Organizada", "Trabajadora", "Tiene un plan"]
   },
   fuego: {
-    name: "Hormiga de fuego", sci: "Solenopsis invicta", emoji: "🔥",
+    name: "Hormiga de fuego", sci: "Solenopsis invicta",
     desc: "Picante y muy de equipo. Defiendes a los tuyos con todo, y cuando hay crisis nadie los saca a flote como tú.",
     fact: "Cuando su nido se inunda, miles de hormigas se agarran entre sí y forman una balsa viviente que flota durante días, con la reina a salvo en el centro.",
     tags: ["Picante", "De equipo", "Resiliente"]
   },
   tejedora: {
-    name: "Hormiga tejedora", sci: "Oecophylla", emoji: "🧶",
+    name: "Hormiga tejedora", sci: "Oecophylla",
     desc: "Creativa y manual: tú construyes lo que otros solo imaginan. Seguro sabes (o quieres aprender) crochet.",
     fact: "Construyen sus nidos en los árboles cosiendo hojas con la seda que producen sus larvas: las obreras las usan como si fueran tubos de pegamento.",
     tags: ["Creativa", "Manual", "Constructora"]
   },
   mielera: {
-    name: "Hormiga mielera", sci: "Myrmecocystus", emoji: "🍯",
+    name: "Hormiga mielera", sci: "Myrmecocystus",
     desc: "La que cuida a todos. Siempre tienes algo guardado para quien lo necesite: snacks, consejos o un abrazo.",
     fact: "Algunas obreras se llenan el abdomen de néctar hasta quedar como uvas y se cuelgan del techo como despensa viviente de la colonia. Viven en el norte de México y el suroeste de EE.UU.",
     tags: ["Generosa", "Protectora", "Despensa del grupo"]
   },
   legionaria: {
-    name: "Hormiga legionaria", sci: "Eciton burchellii", emoji: "🧭",
+    name: "Hormiga legionaria", sci: "Eciton burchellii",
     desc: "Aventurera y nómada. No te quedas quieta: llegas, arrasas con todo el plan y te vas a la siguiente.",
     fact: "No tienen nido fijo: arman un \"vivac\" temporal con sus propios cuerpos y marchan en columnas de cientos de miles cazando todo lo que encuentran.",
     tags: ["Aventurera", "Nómada", "Imparable"]
   },
   trampa: {
-    name: "Hormiga mandíbula de trampa", sci: "Odontomachus", emoji: "⚡",
+    name: "Hormiga mandíbula de trampa", sci: "Odontomachus",
     desc: "Reflejos de rayo. Respondes antes de que terminen la pregunta, y si algo sale mal ya brincaste a otra cosa.",
     fact: "Cierra la mandíbula a más de 200 km/h, uno de los movimientos más rápidos del reino animal, y la usa para salir disparada y escapar del peligro.",
     tags: ["Rápida", "Ágil", "Primero actúa"]
   },
   argentina: {
-    name: "Hormiga argentina", sci: "Linepithema humile", emoji: "🌎",
+    name: "Hormiga argentina", sci: "Linepithema humile",
     desc: "Tienes amigos en todos lados. Donde llegas, haces comunidad, y tu red es más grande de lo que cualquiera imagina.",
     fact: "Forma supercolonias gigantes: una se extiende por miles de kilómetros en la costa del Mediterráneo, y hormigas de distintos continentes se reconocen como de la misma familia.",
     tags: ["Sociable", "Conectora", "Está en todos lados"]
   },
   carpintera: {
-    name: "Hormiga carpintera", sci: "Camponotus", emoji: "🪵",
+    name: "Hormiga carpintera", sci: "Camponotus",
     desc: "Noctámbula y constructora silenciosa. Trabajas cuando todos duermen y cuando por fin te ven, ya hiciste algo enorme.",
     fact: "No comen madera (eso es de termitas): la excavan para hacer túneles y galerías. Muchas especies salen a buscar comida de noche.",
     tags: ["Nocturna", "Constructora", "Profunda"]
   },
   escamolera: {
-    name: "Hormiga escamolera", sci: "Liometopum apiculatum", emoji: "💎",
+    name: "Hormiga escamolera", sci: "Liometopum apiculatum",
     desc: "Una joya escondida. Pocos te conocen de verdad, pero quien lo hace sabe que vales oro. Gustos finos y raros.",
     fact: "Sus larvas son los escamoles, el \"caviar mexicano\": se comen desde tiempos de los aztecas y hoy son de los platillos más caros de México.",
     tags: ["Valiosa", "Gourmet", "Joya escondida"]
@@ -209,7 +207,7 @@ const QUESTIONS = [
     ["Siempre traigo snacks para todos", { mielera: 2 }],
     ["Tengo mi propio huerto (o quiero uno)", { cortadora: 2 }],
     ["Como lo que encuentre en el camino", { legionaria: 2 }],
-    ["Picante, siempre picante 🌶️", { fuego: 2 }] ] },
+    ["Picante, siempre picante", { fuego: 2 }] ] },
   { q: "Tu casa ideal:", options: [
     ["No necesito casa fija, soy nómada", { legionaria: 2 }],
     ["Un loft decorado todo a mano por mí", { tejedora: 2 }],
@@ -230,11 +228,11 @@ const QUESTIONS = [
     ["La que no se está quieta nunca", { legionaria: 2 }],
     ["La que defiende al grupo con todo", { fuego: 2 }],
     ["La que tiene todo bajo control", { cortadora: 2 }] ] },
-  { q: "Elige un emoji:", options: [
-    ["🔥", { fuego: 2 }],
-    ["⚡", { trampa: 2 }],
-    ["🧶", { tejedora: 2 }],
-    ["🌎", { argentina: 1, legionaria: 1 }] ] },
+  { q: "Elige una palabra:", options: [
+    ["Fuego", { fuego: 2 }],
+    ["Velocidad", { trampa: 2 }],
+    ["Hilo", { tejedora: 2 }],
+    ["Mundo", { argentina: 1, legionaria: 1 }] ] },
   { q: "¿A qué hora eres más productiva?", options: [
     ["A las 3 am, cuando todos duermen", { carpintera: 2 }],
     ["Temprano, con mi rutina", { cortadora: 2 }],
@@ -336,11 +334,10 @@ async function register(entry) {
 
 function showResult([key, runnerUp]) {
   const a = ANTS[key];
-  $("r-emoji").textContent = a.emoji;
   $("r-name").textContent = a.name;
   $("r-sci").textContent = a.sci;
   $("r-fact").textContent = a.fact;
-  $("r-second").textContent = `${ANTS[runnerUp].emoji} También tienes algo de ${ANTS[runnerUp].name.toLowerCase()}.`;
+  $("r-second").textContent = `También tienes algo de ${ANTS[runnerUp].name.toLowerCase()}.`;
   $("r-desc").textContent = a.desc;
   $("r-tags").replaceChildren(...a.tags.map((t) => Object.assign(document.createElement("span"), { className: "tag", textContent: t })));
   show("result");
