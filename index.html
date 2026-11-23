@@ -103,7 +103,7 @@
     <input id="email" type="email" autocomplete="email" inputmode="email" required maxlength="200">
     <label class="check"><input type="checkbox" id="consent" required> Acepto que usen mi nombre y correo solo para la tómbola y para contactarme si gano.</label>
     <p class="error" id="error"></p>
-    <button class="btn" id="submit">Ver mi antena</button>
+    <button class="btn" id="submit">Ver mi resultado</button>
   </form>
 
   <section id="result" class="card" hidden>
@@ -115,7 +115,7 @@
     <p class="muted" id="r-second"></p>
     <div class="ticket">
       <img src="hormiga-lado.jpg" alt="La hormiga de crochet del premio" width="675" height="900" loading="lazy">
-      <p><strong>Ya estás en la tómbola.</strong><br><span class="muted">Si te toca esta hormiga te buscamos al final.</span></p>
+      <p><strong>Ya estás en la tómbola.</strong><br><span class="muted">Si ganas la hormiga de crochet, te avisamos al final del evento.</span></p>
     </div>
   </section>
 </main>
@@ -135,17 +135,17 @@ const ANTS = {
   },
   fuego: {
     name: "Hormiga de fuego", sci: "Solenopsis invicta",
-    desc: "Sola picas, pero en bola eres imparable. Si alguien se mete con tu grupo, ya valió. Y cuando todo se está cayendo eres quien dice \"va, sí sale\".",
+    desc: "Por tu cuenta picas, pero en bola eres imparable. Si alguien se mete con tu grupo, ya valió. Y cuando todo se está cayendo eres quien dice \"va, sí sale\".",
     fact: "Cuando se les inunda el nido se agarran unas de otras y arman una balsa que flota días o hasta semanas. Las crías van abajo ayudando a flotar y la reina va protegida adentro."
   },
   tejedora: {
     name: "Hormiga tejedora", sci: "Oecophylla",
-    desc: "Arreglas lo que sea con cinta, hilo y fe. Si todavía no sabes tejer, deberías aprender, tienes manos para eso.",
+    desc: "Arreglas lo que sea con cinta, hilo y fe. Si todavía no sabes tejer, deberías aprender: tienes manos para eso.",
     fact: "Hacen su nido arriba de los árboles cosiendo hojas con la seda que sacan sus larvas. Las obreras cargan a las larvas y las van pasando de hoja en hoja como si fueran tubos de pegamento."
   },
   mielera: {
     name: "Hormiga mielera", sci: "Myrmecocystus",
-    desc: "Siempre traes chicles, curitas, cargador y consejos que nadie te pidió pero que sí servían. Cuando alguien del grupo está mal, eres a quien le escribe primero.",
+    desc: "Siempre traes chicles, curitas, cargador y consejos que nadie te pidió pero que sí sirven. Cuando alguien del grupo está mal, eres la primera persona a la que le escribe.",
     fact: "Algunas obreras se llenan de néctar hasta que la panza les queda del tamaño de una uva, y se quedan colgadas del techo del nido. La colonia las usa de alacena. Viven en el norte de México."
   },
   legionaria: {
@@ -160,12 +160,12 @@ const ANTS = {
   },
   argentina: {
     name: "Hormiga argentina", sci: "Linepithema humile",
-    desc: "Conoces a alguien en cada salón. Caminar contigo por Río Hondo tarda el doble porque saludas a todos. Tu red de contactos da miedo.",
+    desc: "Conoces a alguien en cada salón. Caminar contigo por Río Hondo toma el doble de tiempo porque saludas a todo mundo. Tu red de contactos da miedo.",
     fact: "Forma supercolonias gigantes: la de Europa recorre unos 6,000 km de costa. En un experimento juntaron hormigas de Europa, California y Japón y no se pelearon, como si fueran familia."
   },
   carpintera: {
     name: "Hormiga carpintera", sci: "Camponotus",
-    desc: "Tu hora pico es la 1 a.m. de la noche antes de entregar. Nadie te ve trabajar, pero entregas, y casi siempre te queda mejor que a los demás.",
+    desc: "Tu hora pico es la 1 a.m., la noche antes de la entrega. Nadie te ve trabajar, pero entregas, y casi siempre te queda mejor que a los demás.",
     fact: "Ojo, no comen madera, eso es cosa de las termitas. La escarban para hacerse túneles y cuartos, y muchas salen a buscar comida de noche."
   },
   escamolera: {
@@ -177,11 +177,11 @@ const ANTS = {
 
 // Cada opción suma puntos a una o más especies.
 const QUESTIONS = [
-  { q: "Alguien se te mete en la fila de la cafe.", options: [
-    ["Se lo digo en ese momento", { bala: 2 }],
+  { q: "Alguien se te mete en la fila de la cafe. ¿Qué haces?", options: [
+    ["Le digo algo ahí mismo", { bala: 2 }],
     ["Volteo a ver a mis amigos y entre todos le decimos algo", { fuego: 2 }],
-    ["Me aguanto, tengo prisa", { cortadora: 2 }],
-    ["Ni lo vio venir, ya le gané el lugar", { trampa: 2 }] ] },
+    ["Me aguanto, no tengo tiempo de pelear", { cortadora: 2 }],
+    ["Me le adelanto y recupero mi lugar", { trampa: 2 }] ] },
   { q: "¿A qué hora rindes más?", options: [
     ["Después de la 1 a.m.", { carpintera: 2 }],
     ["En la mañana, con café y mi rutina", { cortadora: 2 }],
@@ -198,15 +198,15 @@ const QUESTIONS = [
     ["Chiles en nogada, mucho trabajo pero vale la pena", { tejedora: 2 }],
     ["Salsa macha, pica y no avisa", { bala: 1, fuego: 1 }],
     ["Tamales para todos", { mielera: 2 }],
-    ["Tacos de la calle a las 2 am", { carpintera: 1, legionaria: 1 }] ] },
-  { q: "Se va la luz en pleno examen en línea.", options: [
+    ["Tacos de la calle a las 2 a.m.", { carpintera: 1, legionaria: 1 }] ] },
+  { q: "Se va la luz en pleno examen en línea. ¿Qué haces?", options: [
     ["Le marco a todo el grupo para ver cómo le hacemos", { fuego: 2 }],
     ["En dos minutos ya me conecté desde el celular", { trampa: 2 }],
     ["Me pongo de malas y que nadie me hable", { bala: 2 }],
     ["Tengo power bank, datos y velas, obvio", { mielera: 2 }] ] },
   { q: "¿Cómo estudias para un parcial?", options: [
     ["Me clavo hasta entender todo a fondo", { carpintera: 2 }],
-    ["Apuntes de colores y calendario", { cortadora: 2 }],
+    ["Con apuntes de colores y un plan por días", { cortadora: 2 }],
     ["En un grupo de estudio de quince personas", { argentina: 2 }],
     ["Un día antes, a toda velocidad", { trampa: 2 }],
     ["Con un libro que nadie más usa", { escamolera: 2 }] ] },
@@ -223,25 +223,25 @@ const QUESTIONS = [
     ["Armo el after en otro lado", { legionaria: 2 }] ] },
   { q: "Escoge un superpoder.", options: [
     ["Ser la persona más rápida del mundo", { trampa: 2 }],
-    ["Cargar todo el súper en un solo viaje", { cortadora: 2 }],
+    ["Cargar todas las bolsas del súper en un solo viaje", { cortadora: 2 }],
     ["Que nadie se atreva a hacerme enojar", { bala: 2 }],
     ["Hacer lo que sea con lo que encuentre", { tejedora: 2 }] ] },
-  { q: "En el celular de tus amigos estás guardado como…", options: [
+  { q: "¿Con qué nombre te tienen en el celular tus amigos?", options: [
     ["Mamá o papá del grupo", { mielera: 2 }],
-    ["\"¿Dónde andas?\"", { legionaria: 2 }],
+    ["¿Dónde andas?", { legionaria: 2 }],
     ["Guardaespaldas", { fuego: 2 }],
-    ["\"Quien sí sabe cuándo se entrega\"", { cortadora: 2 }] ] },
+    ["Agenda del grupo", { cortadora: 2 }] ] },
   { q: "¿Qué dices más seguido?", options: [
     ["Ya lo hice, luego vemos si estaba bien", { trampa: 2 }],
     ["Déjame, yo lo hago", { tejedora: 2 }],
     ["Ah, ¿lo conoces? Es mi amigo", { argentina: 2 }],
     ["No me busques", { bala: 2 }] ] },
-  { q: "¿Cómo te describirían tus amigos?", options: [
+  { q: "¿Qué frase te describe mejor?", options: [
     ["Poca gente me conoce, pero quien me conoce me quiere", { escamolera: 2 }],
     ["No hago ruido, pero siempre cumplo", { carpintera: 2 }],
-    ["Pico, pero con cariño", { fuego: 1, bala: 1 }],
+    ["Soy de mecha corta, pero con cariño", { fuego: 1, bala: 1 }],
     ["Siempre voy con prisa", { trampa: 2 }],
-    ["Siempre te presento a alguien", { argentina: 2 }] ] }
+    ["Siempre ando presentando gente", { argentina: 2 }] ] }
 ];
 
 const $ = (id) => document.getElementById(id);
@@ -323,7 +323,7 @@ $("signup").onsubmit = async (event) => {
   const email = $("email").value.trim().toLowerCase();
   if (!name) return ($("error").textContent = "Escribe tu nombre.");
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return ($("error").textContent = "Revisa tu correo.");
-  if (!$("consent").checked) return ($("error").textContent = "Necesitamos tu permiso para la tómbola.");
+  if (!$("consent").checked) return ($("error").textContent = "Marca la casilla para entrar a la tómbola.");
 
   const top = ranking();
   $("error").textContent = "";
@@ -335,7 +335,7 @@ $("signup").onsubmit = async (event) => {
   } catch {
     $("error").textContent = "No se pudo registrar. Revisa tu conexión e inténtalo otra vez.";
     $("submit").disabled = false;
-    $("submit").textContent = "Ver mi antena";
+    $("submit").textContent = "Ver mi resultado";
   }
 };
 </script>
