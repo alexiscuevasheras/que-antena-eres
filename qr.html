@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>QR del test</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,800&family=Inter:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  body {
+    margin: 0; min-height: 100dvh; background: #fbf5ec; color: #2a1d14; font: 16px/1.5 Inter, sans-serif;
+    display: flex; align-items: center; justify-content: center; text-align: center; padding: 24px 16px;
+  }
+  h1 { font: 800 clamp(2rem, 7vw, 3.5rem)/1.1 Fraunces, Georgia, serif; margin: 0 0 8px; }
+  #qr { display: inline-block; background: #fff; padding: 24px; border-radius: 24px; margin: 24px 0 12px; }
+  #qr img, #qr canvas { width: min(70vw, 420px); height: auto; display: block; }
+  .url { color: #7a6a5c; margin-bottom: 20px; word-break: break-all; }
+  button { font: 600 1rem Inter, sans-serif; border: 0; border-radius: 14px; padding: 14px 20px; background: #c4502b; color: #fff; cursor: pointer; }
+  @media print { button { display: none; } }
+</style>
+</head>
+<body>
+<main>
+  <h1>🐜 ¿Qué antena eres?</h1>
+  <p>Escanea, haz el test y entra a la tómbola de una hormiga de crochet</p>
+  <div id="qr"></div>
+  <div class="url" id="url"></div>
+  <button id="download">Descargar PNG</button>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+const TEST_URL = new URL("./", location.href).href;
+document.getElementById("url").textContent = TEST_URL;
+new QRCode(document.getElementById("qr"), {
+  text: TEST_URL, width: 1200, height: 1200, colorDark: "#2a1d14", colorLight: "#ffffff",
+  correctLevel: QRCode.CorrectLevel.H
+});
+document.getElementById("download").onclick = () => {
+  const link = document.createElement("a");
+  link.download = "qr-que-antena-eres.png";
+  link.href = document.querySelector("#qr canvas").toDataURL("image/png");
+  link.click();
+};
+</script>
+</body>
+</html>
