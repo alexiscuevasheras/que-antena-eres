@@ -313,8 +313,11 @@ function answer(points) {
   else show("signup");
 }
 
+// Los empates se rompen al azar para no favorecer a las primeras especies de la lista.
 function ranking() {
-  return Object.keys(ANTS).sort((a, b) => scores[b] / maxScores[b] - scores[a] / maxScores[a]);
+  const tiebreak = Object.fromEntries(Object.keys(ANTS).map((k) => [k, Math.random()]));
+  return Object.keys(ANTS).sort((a, b) =>
+    scores[b] / maxScores[b] - scores[a] / maxScores[a] || tiebreak[b] - tiebreak[a]);
 }
 
 async function register(entry) {
