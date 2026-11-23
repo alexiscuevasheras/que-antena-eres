@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>¿Qué antena eres?</title>
+<meta name="description" content="Haz el test, descubre qué antena eres y participa en la tómbola de una hormiga de crochet.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐜</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #fbf5ec; --card: #ffffff; --ink: #2a1d14; --muted: #7a6a5c;
+    --accent: #c4502b; --accent-ink: #ffffff; --soft: #f3e6d6; --line: #e8d9c6;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; min-height: 100dvh; background: var(--bg); color: var(--ink);
+    font: 16px/1.5 Inter, system-ui, sans-serif; display: flex; justify-content: center;
+    padding: 24px 16px calc(24px + env(safe-area-inset-bottom));
+  }
+  main { width: 100%; max-width: 520px; }
+  h1, h2 { font-family: Fraunces, Georgia, serif; line-height: 1.1; margin: 0 0 12px; }
+  h1 { font-size: clamp(2.2rem, 9vw, 3rem); font-weight: 800; }
+  h2 { font-size: 1.5rem; font-weight: 600; }
+  p { margin: 0 0 16px; }
+  .muted { color: var(--muted); }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 24px; }
+  .hero-ant { font-size: 4rem; line-height: 1; margin-bottom: 8px; }
+  .btn {
+    display: block; width: 100%; border: 0; border-radius: 14px; padding: 16px;
+    background: var(--accent); color: var(--accent-ink); font: 600 1.05rem Inter, sans-serif; cursor: pointer;
+  }
+  .btn:disabled { opacity: .5; cursor: default; }
+  .option {
+    display: block; width: 100%; text-align: left; margin-bottom: 10px; padding: 14px 16px;
+    background: var(--soft); border: 2px solid transparent; border-radius: 14px;
+    font: 500 1rem Inter, sans-serif; color: var(--ink); cursor: pointer;
+  }
+  .option:hover, .option:focus-visible { border-color: var(--accent); outline: none; }
+  .progress { height: 6px; background: var(--soft); border-radius: 99px; overflow: hidden; margin-bottom: 20px; }
+  .progress > div { height: 100%; background: var(--accent); transition: width .3s; }
+  .step { font-size: .85rem; color: var(--muted); margin-bottom: 6px; }
+  label { display: block; font-weight: 600; font-size: .9rem; margin: 0 0 6px; }
+  input {
+    width: 100%; padding: 14px; border: 1px solid var(--line); border-radius: 12px; margin-bottom: 16px;
+    font: 1rem Inter, sans-serif; background: var(--bg); color: var(--ink);
+  }
+  input:focus { outline: 2px solid var(--accent); border-color: transparent; }
+  .check { display: flex; gap: 10px; align-items: flex-start; font-weight: 400; font-size: .85rem; color: var(--muted); }
+  .check input { width: auto; margin: 3px 0 0; }
+  .error { color: var(--accent); font-size: .9rem; min-height: 1.4em; }
+  .result-emoji { font-size: 4.5rem; line-height: 1; margin-bottom: 8px; }
+  .tag { display: inline-block; background: var(--soft); border-radius: 99px; padding: 4px 12px; font-size: .85rem; margin: 0 6px 6px 0; }
+  .ticket { margin-top: 20px; padding: 16px; border: 2px dashed var(--accent); border-radius: 14px; text-align: center; }
+  .sci { font-style: italic; color: var(--muted); margin-top: -6px; }
+  .fact { background: var(--soft); border-radius: 14px; padding: 14px 16px; margin: 16px 0; }
+  .fact p { margin: 4px 0 0; }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<main>
+  <section id="intro" class="card">
+    <div class="hero-ant">🐜</div>
+    <h1>¿Qué antena eres?</h1>
+    <p>20 preguntas, unos 3 minutos. Descubre qué hormiga eres (con datos reales) y entra a la tómbola para ganar una <strong>hormiga de crochet</strong> hecha a mano.</p>
+    <button class="btn" id="start">Empezar</button>
+  </section>
+
+  <section id="quiz" class="card" hidden>
+    <div class="progress"><div id="bar"></div></div>
+    <div class="step" id="step"></div>
+    <h2 id="question"></h2>
+    <div id="options"></div>
+  </section>
+
+  <form id="signup" class="card" hidden novalidate>
+    <h2>¡Ya casi! 🐜</h2>
+    <p class="muted">Déjanos tu nombre y correo para ver tu resultado y entrar a la tómbola.</p>
+    <label for="name">Nombre</label>
+    <input id="name" autocomplete="name" required maxlength="100">
+    <label for="email">Correo</label>
+    <input id="email" type="email" autocomplete="email" inputmode="email" required maxlength="200">
+    <label class="check"><input type="checkbox" id="consent" required> Acepto que usen mi nombre y correo solo para la tómbola y para contactarme si gano.</label>
+    <p class="error" id="error"></p>
+    <button class="btn" id="submit">Ver mi antena</button>
+  </form>
+
+  <section id="result" class="card" hidden>
+    <div class="result-emoji" id="r-emoji"></div>
+    <p class="muted" style="margin:0">Eres…</p>
+    <h1 id="r-name"></h1>
+    <p class="sci" id="r-sci"></p>
+    <p id="r-desc"></p>
+    <div id="r-tags"></div>
+    <div class="fact"><strong>🔬 Dato real</strong><p id="r-fact"></p></div>
+    <p class="muted" id="r-second"></p>
+    <div class="ticket">
+      <strong>🎟️ Ya estás en la tómbola</strong><br>
+      <span class="muted">Si ganas la hormiga de crochet te buscamos al final.</span>
+    </div>
+  </section>
+</main>
+
+<script src="config.js"></script>
+<script>
+const ANTS = {
+  bala: {
+    name: "Hormiga bala", sci: "Paraponera clavata", emoji: "💥",
+    desc: "Intensa, leal y con mecha corta: te enojas fácil y cuando te provocan, se nota. Pero tu gente sabe que contigo nadie se mete.",
+    fact: "Tiene la picadura más dolorosa de cualquier insecto (nivel 4+ en el índice Schmidt) y el dolor puede durar 24 horas. Se llama \"bala\" porque dicen que se siente como un balazo.",
+    tags: ["Intensa", "Leal", "No me provoques"]
+  },
+  cortadora: {
+    name: "Hormiga cortadora de hojas", sci: "Atta", emoji: "🍃",
+    desc: "Organizada, trabajadora y con un plan para todo. Tienes un sistema y lo cumples, aunque cargues con más de lo que te toca.",
+    fact: "No se comen las hojas: las usan para cultivar un hongo del que se alimentan. Fueron agricultoras millones de años antes que los humanos, y pueden cargar varias veces su propio peso.",
+    tags: ["Organizada", "Trabajadora", "Tiene un plan"]
+  },
+  fuego: {
+    name: "Hormiga de fuego", sci: "Solenopsis invicta", emoji: "🔥",
+    desc: "Picante y muy de equipo. Defiendes a los tuyos con todo, y cuando hay crisis nadie los saca a flote como tú.",
+    fact: "Cuando su nido se inunda, miles de hormigas se agarran entre sí y forman una balsa viviente que flota durante días, con la reina a salvo en el centro.",
+    tags: ["Picante", "De equipo", "Resiliente"]
+  },
+  tejedora: {
+    name: "Hormiga tejedora", sci: "Oecophylla", emoji: "🧶",
+    desc: "Creativa y manual: tú construyes lo que otros solo imaginan. Seguro sabes (o quieres aprender) crochet.",
+    fact: "Construyen sus nidos en los árboles cosiendo hojas con la seda que producen sus larvas: las obreras las usan como si fueran tubos de pegamento.",
+    tags: ["Creativa", "Manual", "Constructora"]
+  },
+  mielera: {
+    name: "Hormiga mielera", sci: "Myrmecocystus", emoji: "🍯",
+    desc: "La que cuida a todos. Siempre tienes algo guardado para quien lo necesite: snacks, consejos o un abrazo.",
+    fact: "Algunas obreras se llenan el abdomen de néctar hasta quedar como uvas y se cuelgan del techo como despensa viviente de la colonia. Viven en el norte de México y el suroeste de EE.UU.",
+    tags: ["Generosa", "Protectora", "Despensa del grupo"]
+  },
+  legionaria: {
+    name: "Hormiga legionaria", sci: "Eciton burchellii", emoji: "🧭",
+    desc: "Aventurera y nómada. No te quedas quieta: llegas, arrasas con todo el plan y te vas a la siguiente.",
+    fact: "No tienen nido fijo: arman un \"vivac\" temporal con sus propios cuerpos y marchan en columnas de cientos de miles cazando todo lo que encuentran.",
+    tags: ["Aventurera", "Nómada", "Imparable"]
+  },
+  trampa: {
+    name: "Hormiga mandíbula de trampa", sci: "Odontomachus", emoji: "⚡",
+    desc: "Reflejos de rayo. Respondes antes de que terminen la pregunta, y si algo sale mal ya brincaste a otra cosa.",
+    fact: "Cierra la mandíbula a más de 200 km/h, uno de los movimientos más rápidos del reino animal, y la usa para salir disparada y escapar del peligro.",
+    tags: ["Rápida", "Ágil", "Primero actúa"]
+  },
+  argentina: {
+    name: "Hormiga argentina", sci: "Linepithema humile", emoji: "🌎",
+    desc: "Tienes amigos en todos lados. Donde llegas, haces comunidad, y tu red es más grande de lo que cualquiera imagina.",
+    fact: "Forma supercolonias gigantes: una se extiende por miles de kilómetros en la costa del Mediterráneo, y hormigas de distintos continentes se reconocen como de la misma familia.",
+    tags: ["Sociable", "Conectora", "Está en todos lados"]
+  },
+  carpintera: {
+    name: "Hormiga carpintera", sci: "Camponotus", emoji: "🪵",
+    desc: "Noctámbula y constructora silenciosa. Trabajas cuando todos duermen y cuando por fin te ven, ya hiciste algo enorme.",
+    fact: "No comen madera (eso es de termitas): la excavan para hacer túneles y galerías. Muchas especies salen a buscar comida de noche.",
+    tags: ["Nocturna", "Constructora", "Profunda"]
+  },
+  escamolera: {
+    name: "Hormiga escamolera", sci: "Liometopum apiculatum", emoji: "💎",
+    desc: "Una joya escondida. Pocos te conocen de verdad, pero quien lo hace sabe que vales oro. Gustos finos y raros.",
+    fact: "Sus larvas son los escamoles, el \"caviar mexicano\": se comen desde tiempos de los aztecas y hoy son de los platillos más caros de México.",
+    tags: ["Valiosa", "Gourmet", "Joya escondida"]
+  }
+};
+
+// Cada opción suma puntos a una o más especies.
+const QUESTIONS = [
+  { q: "Alguien se mete en la fila frente a ti. ¿Qué haces?", options: [
+    ["Le digo sus verdades al instante", { bala: 2 }],
+    ["Lo encaro, pero con mis amigos atrás", { fuego: 2 }],
+    ["Respiro y sigo; tengo cosas que hacer", { cortadora: 2 }],
+    ["Reacciono tan rápido que ni lo vio venir", { trampa: 2 }] ] },
+  { q: "Tu fin de semana ideal:", options: [
+    ["Viaje sin plan, a donde nos lleve el camino", { legionaria: 2 }],
+    ["Taller de manualidades o crochet", { tejedora: 2 }],
+    ["Cocinar para todos mis amigos", { mielera: 2 }],
+    ["Una fiesta enorme donde conozco a todos", { argentina: 2 }] ] },
+  { q: "En un proyecto en equipo eres quien…", options: [
+    ["Reparte tareas y arma el sistema", { cortadora: 2 }],
+    ["Construye con sus manos lo que nadie sabe hacer", { tejedora: 2 }],
+    ["Guarda energía y saca al equipo en la crisis", { mielera: 2 }],
+    ["Llega, arrasa y termina todo en una noche", { legionaria: 2 }] ] },
+  { q: "Se inunda tu casa. ¿Cuál es tu plan?", options: [
+    ["Nos agarramos todos y flotamos juntos", { fuego: 2 }],
+    ["Salgo disparada antes de mojarme", { trampa: 2 }],
+    ["Me pongo de malas y que nadie me hable", { bala: 2 }],
+    ["Tranqui, ya tenía provisiones guardadas", { mielera: 2 }] ] },
+  { q: "¿Cuántos amigos tienes?", options: [
+    ["Miles, en varios países", { argentina: 2 }],
+    ["Pocos, pero leales hasta la muerte", { bala: 1, fuego: 1 }],
+    ["Los que se suman a la aventura del día", { legionaria: 2 }],
+    ["Los de mi club, taller o equipo", { tejedora: 1, cortadora: 1 }] ] },
+  { q: "Elige un superpoder:", options: [
+    ["Ser la más rápida del mundo", { trampa: 2 }],
+    ["Cargar 50 veces mi peso", { cortadora: 2 }],
+    ["Que mi enojo duela 24 horas", { bala: 2 }],
+    ["Construir una casa con lo que encuentre", { tejedora: 2 }] ] },
+  { q: "Tu relación con la comida:", options: [
+    ["Siempre traigo snacks para todos", { mielera: 2 }],
+    ["Tengo mi propio huerto (o quiero uno)", { cortadora: 2 }],
+    ["Como lo que encuentre en el camino", { legionaria: 2 }],
+    ["Picante, siempre picante 🌶️", { fuego: 2 }] ] },
+  { q: "Tu casa ideal:", options: [
+    ["No necesito casa fija, soy nómada", { legionaria: 2 }],
+    ["Un loft decorado todo a mano por mí", { tejedora: 2 }],
+    ["Un edificio donde viven todos mis amigos", { argentina: 2 }],
+    ["Un búnker donde nadie me moleste", { bala: 2 }] ] },
+  { q: "Alguien te pide un favor:", options: [
+    ["Le doy todo lo que tengo guardado", { mielera: 2 }],
+    ["Le ayudo, pero rapidito", { trampa: 2 }],
+    ["Convoco a todo el grupo para ayudar", { fuego: 1, argentina: 1 }],
+    ["Le hago un plan paso a paso", { cortadora: 2 }] ] },
+  { q: "¿Qué frase te describe?", options: [
+    ["\"Primero reacciono, luego pienso\"", { trampa: 2 }],
+    ["\"Lo hecho a mano es mejor\"", { tejedora: 2 }],
+    ["\"Donde hay una, hay mil\"", { argentina: 2 }],
+    ["\"No me provoques\"", { bala: 2 }] ] },
+  { q: "¿Cómo te ven tus amigos?", options: [
+    ["Como la mamá o el papá del grupo", { mielera: 2 }],
+    ["La que no se está quieta nunca", { legionaria: 2 }],
+    ["La que defiende al grupo con todo", { fuego: 2 }],
+    ["La que tiene todo bajo control", { cortadora: 2 }] ] },
+  { q: "Elige un emoji:", options: [
+    ["🔥", { fuego: 2 }],
+    ["⚡", { trampa: 2 }],
+    ["🧶", { tejedora: 2 }],
+    ["🌎", { argentina: 1, legionaria: 1 }] ] },
+  { q: "¿A qué hora eres más productiva?", options: [
+    ["A las 3 am, cuando todos duermen", { carpintera: 2 }],
+    ["Temprano, con mi rutina", { cortadora: 2 }],
+    ["Cuando me llega la inspiración", { tejedora: 2 }],
+    ["Después de comer algo rico", { escamolera: 1, mielera: 1 }],
+    ["Todo el día, sin parar", { legionaria: 2 }] ] },
+  { q: "¿Qué platillo mexicano eres?", options: [
+    ["Escamoles con mantequilla: gourmet", { escamolera: 2 }],
+    ["Chiles en nogada: elaborado y hecho a mano", { tejedora: 2 }],
+    ["Salsa macha: pica y no avisa", { bala: 1, fuego: 1 }],
+    ["Tamales para todos", { mielera: 2 }],
+    ["Tacos de la calle a las 2 am", { carpintera: 1, legionaria: 1 }] ] },
+  { q: "Te dan un regalo que no te gusta:", options: [
+    ["Lo digo en la cara", { bala: 2 }],
+    ["Lo transformo en otra cosa", { tejedora: 2 }],
+    ["Lo guardo por si a alguien le sirve", { mielera: 2 }],
+    ["Lo aprecio: lo valioso está en los detalles", { escamolera: 2 }],
+    ["\"¡Gracias!\" y ya estoy pensando en otra cosa", { trampa: 2 }] ] },
+  { q: "Tu forma de estudiar:", options: [
+    ["Excavo hasta el fondo del tema", { carpintera: 2 }],
+    ["Apuntes de colores y un sistema", { cortadora: 2 }],
+    ["En un grupo de estudio enorme", { argentina: 2 }],
+    ["Un día antes, a toda velocidad", { trampa: 2 }],
+    ["Busco la fuente rara que nadie leyó", { escamolera: 2 }] ] },
+  { q: "¿Qué te molesta más?", options: [
+    ["Que me hagan esperar", { trampa: 1, bala: 1 }],
+    ["Que me saquen de mi rutina", { cortadora: 2 }],
+    ["Que no me valoren", { escamolera: 2 }],
+    ["Quedarme mucho tiempo en el mismo lugar", { legionaria: 2 }],
+    ["El ruido cuando me quiero concentrar", { carpintera: 2 }] ] },
+  { q: "Elige un lugar:", options: [
+    ["Un bosque de árboles viejos", { carpintera: 2 }],
+    ["La selva amazónica", { bala: 1, legionaria: 1 }],
+    ["Un mercado mexicano lleno de sabores", { escamolera: 1, mielera: 1 }],
+    ["Una isla en medio de un río", { fuego: 2 }],
+    ["Cualquier ciudad del mundo", { argentina: 2 }] ] },
+  { q: "¿Cuál es tu rol en una fiesta?", options: [
+    ["La que se va a las 5 am", { carpintera: 2 }],
+    ["La que trajo comida para todos", { mielera: 2 }],
+    ["El alma de la fiesta", { argentina: 1, fuego: 1 }],
+    ["La del outfit más único", { escamolera: 1, tejedora: 1 }],
+    ["La que arma el after en otro lado", { legionaria: 2 }] ] },
+  { q: "¿Qué dirían de ti en una frase?", options: [
+    ["\"Pocos la conocen, pero vale oro\"", { escamolera: 2 }],
+    ["\"Trabaja en silencio y construye en grande\"", { carpintera: 2 }],
+    ["\"Pica, pero con cariño\"", { fuego: 1, bala: 1 }],
+    ["\"Rápida como un rayo\"", { trampa: 2 }],
+    ["\"Siempre conecta a la gente\"", { argentina: 2 }] ] }
+];
+
+const $ = (id) => document.getElementById(id);
+const show = (id) => ["intro", "quiz", "signup", "result"].forEach((s) => ($(s).hidden = s !== id));
+
+let current = 0;
+const scores = Object.fromEntries(Object.keys(ANTS).map((k) => [k, 0]));
+
+// Puntos máximos que cada especie puede juntar; normaliza para que ninguna salga más solo por aparecer más.
+const maxScores = Object.fromEntries(Object.keys(ANTS).map((k) => [k,
+  QUESTIONS.reduce((sum, { options }) => sum + Math.max(0, ...options.map(([, pts]) => pts[k] || 0)), 0)]));
+
+const shuffle = (list) => list.map((x) => [Math.random(), x]).sort((a, b) => a[0] - b[0]).map(([, x]) => x);
+
+function renderQuestion() {
+  const { q, options } = QUESTIONS[current];
+  $("bar").style.width = `${(current / QUESTIONS.length) * 100}%`;
+  $("step").textContent = `Pregunta ${current + 1} de ${QUESTIONS.length}`;
+  $("question").textContent = q;
+  $("options").replaceChildren(...shuffle(options).map(([label, points]) => {
+    const button = document.createElement("button");
+    button.className = "option";
+    button.textContent = label;
+    button.onclick = () => answer(points);
+    return button;
+  }));
+}
+
+function answer(points) {
+  Object.entries(points).forEach(([ant, pts]) => (scores[ant] += pts));
+  current++;
+  if (current < QUESTIONS.length) renderQuestion();
+  else show("signup");
+}
+
+function ranking() {
+  return Object.keys(ANTS).sort((a, b) => scores[b] / maxScores[b] - scores[a] / maxScores[a]);
+}
+
+async function register(entry) {
+  if (!window.SCRIPT_URL) throw new Error("Falta configurar SCRIPT_URL");
+  await fetch(window.SCRIPT_URL, {
+    method: "POST", mode: "no-cors",
+    headers: { "Content-Type": "text/plain;charset=utf-8" },
+    body: JSON.stringify(entry)
+  });
+}
+
+function showResult([key, runnerUp]) {
+  const a = ANTS[key];
+  $("r-emoji").textContent = a.emoji;
+  $("r-name").textContent = a.name;
+  $("r-sci").textContent = a.sci;
+  $("r-fact").textContent = a.fact;
+  $("r-second").textContent = `${ANTS[runnerUp].emoji} También tienes algo de ${ANTS[runnerUp].name.toLowerCase()}.`;
+  $("r-desc").textContent = a.desc;
+  $("r-tags").replaceChildren(...a.tags.map((t) => Object.assign(document.createElement("span"), { className: "tag", textContent: t })));
+  show("result");
+}
+
+$("start").onclick = () => { show("quiz"); renderQuestion(); };
+
+$("signup").onsubmit = async (event) => {
+  event.preventDefault();
+  const name = $("name").value.trim();
+  const email = $("email").value.trim().toLowerCase();
+  if (!name) return ($("error").textContent = "Escribe tu nombre.");
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return ($("error").textContent = "Revisa tu correo.");
+  if (!$("consent").checked) return ($("error").textContent = "Necesitamos tu permiso para la tómbola.");
+
+  const top = ranking();
+  $("error").textContent = "";
+  $("submit").disabled = true;
+  $("submit").textContent = "Enviando…";
+  try {
+    await register({ name, email, antenna: ANTS[top[0]].name });
+    showResult(top);
+  } catch {
+    $("error").textContent = "No se pudo registrar. Revisa tu conexión e inténtalo otra vez.";
+    $("submit").disabled = false;
+    $("submit").textContent = "Ver mi antena";
+  }
+};
+</script>
+</body>
+</html>
