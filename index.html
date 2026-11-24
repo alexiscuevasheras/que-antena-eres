@@ -4,10 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>¿Qué antena eres?</title>
-<meta name="description" content="12 preguntas para saber qué hormiga eres. Al final entras a la tómbola por una hormiga de crochet o un pase doble a Cinépolis VIP.">
-<link rel="icon" href="hormiga-frente.jpg">
+<meta name="description" content="12 preguntas para saber qué hormiga eres. Al final entras a la tómbola por un pase doble a Cinépolis VIP.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&display=swap" rel="stylesheet">
 <style>
   /* Colores sacados de la foto: hojas, estambre y las resistencias azules de las antenas. */
   :root {
@@ -56,18 +55,11 @@
   .check input { width: auto; margin: 3px 0 0; }
   .error { color: #b3261e; font-size: .9rem; min-height: 1.4em; }
   .hand { font-family: Caveat, cursive; font-size: 1.45rem; line-height: 1.1; color: var(--leaf); }
-  .photo { position: relative; margin: -24px -24px 16px; }
-  .photo img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; object-position: center 55%; border-radius: 6px 6px 0 0; }
-  .photo .hand {
-    position: absolute; left: 14px; bottom: 12px; max-width: 70%; padding: 6px 10px;
-    background: var(--card); transform: rotate(-2deg); box-shadow: 0 2px 6px rgb(0 0 0 / .15);
-  }
   .kicker { margin: 0; color: var(--muted); }
   .sci { font-style: italic; color: var(--muted); margin-top: -6px; }
   .fact { border-left: 3px solid var(--accent); padding: 2px 0 2px 14px; margin: 20px 0; }
   .fact p { margin: 4px 0 0; }
   .ticket { margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--line); display: flex; gap: 16px; align-items: center; }
-  .ticket img { width: 96px; height: 96px; object-fit: cover; object-position: center 45%; border-radius: 6px; flex: none; }
   .ticket p { margin: 0; }
   .ig { margin: 20px 0 0; text-align: center; font-weight: 700; }
   .ig a { color: var(--accent); }
@@ -77,13 +69,9 @@
 <body>
 <main>
   <section id="intro" class="card">
-    <div class="photo">
-      <img src="hormiga-frente.jpg" alt="Hormiga de crochet con antenas de resistencias" width="675" height="900">
-      <span class="hand">el premio. sí, sus antenas son resistencias</span>
-    </div>
     <h1>¿Qué antena eres?</h1>
     <p>Son 12 preguntas, como 2 minutos. Te decimos qué hormiga eres y te contamos algo de ella que seguro no sabías.</p>
-    <p class="muted">Al final entras a la tómbola. Se rifan la hormiga de crochet de la foto y un pase doble a Cinépolis VIP, función a elegir.</p>
+    <p class="muted">Al final entras a la tómbola por un pase doble a Cinépolis VIP, función a elegir.</p>
     <button class="btn" id="start">Empezar</button>
   </section>
 
@@ -116,8 +104,7 @@
     <div class="fact"><strong>Dato real</strong><p id="r-fact"></p></div>
     <p class="muted" id="r-second"></p>
     <div class="ticket">
-      <img src="hormiga-lado.jpg" alt="La hormiga de crochet del premio" width="675" height="900" loading="lazy">
-      <p><strong>Ya estás en la tómbola.</strong><br><span class="muted">Se rifan la hormiga de crochet y un pase doble a Cinépolis VIP, función a elegir. Si ganas, te avisamos al final del evento.</span></p>
+      <p><strong>Ya estás en la tómbola.</strong><br><span class="muted">Se rifa un pase doble a Cinépolis VIP, función a elegir. Si ganas, te avisamos al final del evento.</span></p>
     </div>
     <p class="ig">Síguenos en Instagram: <a href="https://www.instagram.com/repreantenas/" target="_blank" rel="noopener">@repreantenas</a></p>
   </section>
